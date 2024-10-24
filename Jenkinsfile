@@ -36,24 +36,6 @@ pipeline {
             }
         }
 
-        stage('Stop Running Containers') {
-            steps {
-                script {
-                    bat 'docker ps -q | ForEach-Object { docker stop $_ }'
-                }
-            }
-        }
-
-        stage('Clean Up Docker') {
-            steps {
-                script {
-                    // Clean up all Docker containers
-                    bat 'docker ps -aq | ForEach-Object { docker rm $_ }'
-                }
-            }
-        }
-    }
-
     post {
         always {
             script {
