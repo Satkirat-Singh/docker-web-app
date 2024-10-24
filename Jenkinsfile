@@ -21,7 +21,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Exposing container on port 80 (mapped to localhost port 8080)
+                    
                     bat 'docker run -d -p 80:80 myimage'
                 }
             }
@@ -30,8 +30,16 @@ pipeline {
         stage('Test Application') {
             steps {
                 script {
-                    // Testing the application on localhost:8080, since port 8080 is mapped to the container
+                    
                     bat 'curl http://localhost:80'
+                }
+            }
+        }
+
+        stage('Stop Running Containers') {
+            steps {
+                script {
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -q\') DO docker stop %i'
                 }
             }
         }
