@@ -39,7 +39,7 @@ pipeline {
         stage('Stop Running Containers') {
             steps {
                 script {
-                    bat 'for /F "tokens=*" %i IN (\'docker ps -q\') DO docker stop %i'
+                    bat 'docker ps -q | ForEach-Object { docker stop $_ }'
                 }
             }
         }
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     // Clean up all Docker containers
-                    bat 'for /F "tokens=*" %i IN (\'docker ps -aq\') DO docker rm -f %i'
+                    bat 'docker ps -aq | ForEach-Object { docker rm $_ }'
                 }
             }
         }
