@@ -6,7 +6,6 @@ pipeline {
             steps {
                 script {
                     bat 'git clone https://github.com/Satkirat-Singh/docker-web-app.git'
-                    
                 }
             }
         }
@@ -15,7 +14,6 @@ pipeline {
             steps {
                 script {
                     bat 'docker build -t myimage .'
-                    
                 }
             }
         }
@@ -23,8 +21,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
+                    // Exposing container on port 80 (mapped to localhost port 8080)
                     bat 'docker run -d -p 80:80 myimage'
-                    
                 }
             }
         }
@@ -32,8 +30,8 @@ pipeline {
         stage('Test Application') {
             steps {
                 script {
-                    bat 'curl http://localhost:8080'
-                    
+                    // Testing the application on localhost:8080, since port 8080 is mapped to the container
+                    bat 'curl http://localhost:80'
                 }
             }
         }
@@ -41,8 +39,8 @@ pipeline {
         stage('Clean Up Docker') {
             steps {
                 script {
-                    bat 'docker stop $(docker ps -q) && docker rm $(docker ps -aq)'
-                    
+                    // Clean up all Docker containers
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -aq\') DO docker rm -f %i'
                 }
             }
         }
@@ -51,8 +49,8 @@ pipeline {
     post {
         always {
             script {
+                // Clean up dangling Docker resources
                 bat 'docker system prune -f'
-                
             }
         }
     }
