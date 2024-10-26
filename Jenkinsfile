@@ -30,7 +30,7 @@ pipeline {
         stage('Test Application') {
             steps {
                 script {
-                    bat 'curl http://localhost:8082'
+                    bat 'curl http://localhost:8081'
                 }
             }
         }
