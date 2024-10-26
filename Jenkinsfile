@@ -48,14 +48,3 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                // Clean up Docker container and image after execution
-                bat 'docker rm -f mycontainer'
-                bat 'docker system prune -f'
-            }
-        }
-    }
-}
