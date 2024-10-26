@@ -18,11 +18,23 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Deploy Application') {
             steps {
                 script {
+                    // Run the container in detached mode with port mapping
+                    bat 'docker run -d -p 8081:80 --name mycontainer myimage'
                     
-                    bat 'docker run -d -p 8081 myimage'
+                    // Wait to allow the container to fully initialize
+                    sleep(time: 10, unit: 'SECONDS')
+                }
+            }
+        }
+
+        stage('Check Logs') {
+            steps {
+                script {
+                    // Print container logs to ensure it started successfully
+                    bat 'docker logs mycontainer'
                 }
             }
         }
@@ -30,17 +42,18 @@ pipeline {
         stage('Test Application') {
             steps {
                 script {
+                    // Test accessibility of the application
                     bat 'curl http://localhost:8081'
                 }
             }
         }
-
     }
 
     post {
         always {
             script {
-                // Clean up dangling Docker resources
+                // Clean up Docker container and image after execution
+                bat 'docker rm -f mycontainer'
                 bat 'docker system prune -f'
             }
         }
