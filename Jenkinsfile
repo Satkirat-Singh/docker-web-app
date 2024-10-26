@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Exposing container on port 80 (mapped to localhost port 8080)
-                    bat 'docker run -d -p 8080:80 myimage'
+                    bat 'docker run -d -p 8081 myimage'
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     // Testing the application on localhost:8080, since port 8080 is mapped to the container
-                    bat 'curl http://localhost:8080'
+                    bat 'curl http://localhost:8081'
                 }
             }
         }
