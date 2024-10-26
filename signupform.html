@@ -34,17 +34,5 @@
     <footer>
         <p>&copy; 2024 My Web App</p>
     </footer>
-
-    <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        if (!username || !email || !password) {
-            alert("All fields (username, email, and password) are required.");
-            event.preventDefault();
-        }
-    });
-    </script>
 </body>
 </html>

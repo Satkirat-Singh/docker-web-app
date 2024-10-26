@@ -6,25 +6,21 @@ body {
     padding: 0;
 }
 
-header, footer {
+header {
     background-color: #333;
     color: white;
-    padding: 10px 0;
+    padding: 1rem;
     text-align: center;
 }
 
-header h1, footer p {
-    margin: 0;
-}
-
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin: 0 1rem;
 }
 
 nav ul li a {
@@ -33,32 +29,42 @@ nav ul li a {
 }
 
 main {
-    padding: 20px;
+    padding: 2rem;
     text-align: center;
 }
 
-form {
-    display: inline-block;
-    text-align: left;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-input {
-    margin-bottom: 15px;
-    padding: 8px;
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    box-sizing: border-box;
+}
+
+form {
+    margin: auto;
+    text-align: left;
+    max-width: 300px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 button {
-    padding: 10px 20px;
     background-color: #333;
     color: white;
     border: none;
+    padding: 0.5rem 1rem;
     cursor: pointer;
 }
 
